@@ -6,16 +6,27 @@ import { analyzeUrl } from "@/lib/urlAnalyzer";
 export default function Home() {
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
+  const [results, setResults] = useState<{
+  usesHttps: boolean;
+  isIpAddress: boolean;
+  isVeryLong: boolean;
+  foundKeywords: string[];
+  hasSuspiciousCharacters: boolean;
+  hasManySubdomains: boolean;
+  riskScore: number;
+  riskLevel: string;
+  warnings: string[];
+} | null>(null);
 
   function checkUrl() {
     setError("");
 
     try {
-      const parseUrl = new URL(url);
+      const parsedUrl = new URL(url);
 
-      const results = analyzeUrl(parseUrl.toString());
+      const analysis = analyzeUrl(parsedUrl.toString());
 
-      console.log(results);
+      setResults(analysis);
     
     } catch {
       setError("Please enter a valid URL.");
@@ -55,6 +66,68 @@ export default function Home() {
           <p className="text-red-600 mt-3">
             {error}
           </p>
+        )}
+
+        {results && (
+          <div className="mt-8 border rounded-xl p-6 text-left">
+            <h2 className="text-2xl font-bold mb-4">
+              Analysis Results
+            </h2>
+
+            <div className="mb-6">
+              <p className="text-lg font-semibold">
+                Risk Level: {results.riskLevel}
+              </p>
+
+              <p>
+                Risk Score: {results.riskScore}
+              </p>
+            </div>
+
+            <p>
+              HTTPS: {results.usesHttps ? "Yes" : "No"}
+            </p>
+
+            <p>
+              IP Address: {results.isIpAddress ? "Yes" : "No"}
+            </p>
+
+            <p>
+              Very Long URL: {results.isVeryLong ? "Yes" : "No"}
+            </p>
+
+            <p>
+              Suspicious Keywords:{" "}
+              {results.foundKeywords.length > 0
+                ? results.foundKeywords.join(", ")
+                : "None detected"}
+            </p>
+
+            <p>
+              Suspicious Characters:{" "}
+              {results.hasSuspiciousCharacters ? "Detected" : "None detected"}
+            </p>
+
+            <p>
+              Many Subdomains:{" "}
+              {results.hasManySubdomains ? "Detected" : "None detected"}
+            </p>
+
+          {results.warnings.length > 0 && (
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold mb-2">
+                Warnings
+              </h3>
+
+              <ul className="list-disc pl-5">
+                {results.warnings.map((warning, index) => (
+                  <li key={index}>{warning}</li>
+                ))}
+              </ul>
+            </div>
+          )} 
+
+          </div>
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">

@@ -41,6 +41,24 @@ The goal of LinkShield is to create a simple and accessible tool that allows use
 
 ---
 
+## How to run
+
+1. Clone the repository
+2. Open the project folder
+3. Install dependencies:
+
+npm install
+
+4. Start the development server:
+
+npm run dev
+
+5. Open:
+
+http://localhost:3000
+
+---
+
 How to Use LinkShield
 
 Step 1 — Open LinkShield
@@ -84,18 +102,6 @@ When in doubt, avoid entering passwords, payment information, or other sensitive
 
 ---
 
-Technology Stack
-
-LinkShield is built using:
-
-- TypeScript — Programming language
-- Next.js — Web application framework
-- React — User interface
-- Tailwind CSS — Styling
-- Git & GitHub — Version control and project collaboration
-
----
-
 Current Features
 
 - URL input and validation
@@ -104,22 +110,6 @@ Current Features
 - URL length analysis
 - Suspicious URL analysis
 - Risk indicators for potentially suspicious links
-
----
-
-Future Improvements
-
-Planned improvements include:
-
-- Risk scoring system
-- More URL security checks
-- Suspicious keyword detection
-- Subdomain analysis
-- Improved results interface
-- Website metadata analysis
-- Security explanations for each detected indicator
-- Automated testing
-- Deployment as a publicly accessible web application
 
 ---
 
