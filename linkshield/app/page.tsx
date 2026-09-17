@@ -33,6 +33,12 @@ export default function Home() {
     }
   }
 
+  function clearResults() {
+  setUrl("");
+  setError("");
+  setResults(null);
+}
+
   function getRiskStyle() {
     if (!results) return "";
 
@@ -140,6 +146,13 @@ export default function Home() {
                 className="rounded-lg bg-[#526F6B] px-8 py-4 font-semibold tracking-wide text-white transition hover:bg-[#405A57]"
               >
                 CHECK URL →
+              </button>
+
+              <button
+                onClick={clearResults}
+                className="rounded-lg border border-[#263C3D]/30 px-6 py-4 font-semibold text-[#263C3D] transition hover:bg-[#EEE9DF]"
+              >
+                CLEAR
               </button>
 
             </div>
@@ -279,8 +292,6 @@ export default function Home() {
 
             </div>
 
-
-            {/* RISK CHECKS */}
 
             <div className="border-y border-[#263C3D]/15 py-6 lg:border-x lg:border-y-0 lg:px-8">
 
