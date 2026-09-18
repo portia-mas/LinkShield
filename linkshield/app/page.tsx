@@ -128,13 +128,18 @@ export default function Home() {
               <div className="flex flex-1 items-center">
 
                 <span className="px-4 text-xl text-[#526568]">
-                  🔗
+                  
                 </span>
 
                 <input
                   type="text"
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
+                  onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        checkUrl();
+                      }
+                    }}
                   placeholder="https://example.com"
                   className="w-full bg-transparent px-2 py-4 text-[#263C3D] outline-none placeholder:text-[#526568]/60"
                 />
@@ -145,7 +150,7 @@ export default function Home() {
                 onClick={checkUrl}
                 className="rounded-lg bg-[#526F6B] px-8 py-4 font-semibold tracking-wide text-white transition hover:bg-[#405A57]"
               >
-                CHECK URL →
+                CHECK URL
               </button>
 
               <button
